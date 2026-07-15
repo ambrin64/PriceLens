@@ -56,3 +56,7 @@ chrome-profile/
 chrome-profile-pdf/
 chrome-profile-pdf2/
 .cache.json
+
+# Personal interview prep — not part of the project
+PriceLens-Interview-Notes.pdf
+scratch/make_bugs_pdf.py

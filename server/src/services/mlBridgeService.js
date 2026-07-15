@@ -84,12 +84,17 @@ const withRetry = async (fn, retries = MAX_RETRIES) => {
 const buildHistoryPayload = (historyDocs) =>
   (historyDocs || [])
     .filter((h) => h.price > 0)
-    .map((h) => ({
-      date:  h.date instanceof Date
-               ? h.date.toISOString().split('T')[0]
-               : String(h.date).split('T')[0],
-      price: Number(h.price),
-    }))
+    .map((h) => {
+      // PriceHistory docs store the date on `timestamp`; older callers may use `date`.
+      // Support both so the ML service never receives an unparseable "undefined" date.
+      const d = h.date || h.timestamp;
+      return {
+        date:  d instanceof Date
+                 ? d.toISOString().split('T')[0]
+                 : String(d).split('T')[0],
+        price: Number(h.price),
+      };
+    })
     .sort((a, b) => (a.date < b.date ? -1 : 1));
 
 // ── Fallbacks ─────────────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 {
-  "trained_at": "2026-05-07T06:36:45.226873",
+  "trained_at": "2026-07-13T23:17:09.155347",
   "dataset_rows": 22800,
   "features": [
     "day_of_week",
@@ -29,29 +29,29 @@
   "models": [
     {
       "name": "GradientBoosting",
-      "mae": 109.56,
-      "rmse": 289.15,
+      "mae": 108.74,
+      "rmse": 276.05,
       "r2": 0.9999,
       "mape": 0.5
     },
     {
       "name": "LinearRegression",
-      "mae": 191.69,
-      "rmse": 365.55,
+      "mae": 202.12,
+      "rmse": 365.38,
       "r2": 0.9999,
-      "mape": 3.87
+      "mape": 4.12
     },
     {
       "name": "Ridge",
-      "mae": 201.51,
-      "rmse": 379.52,
+      "mae": 206.4,
+      "rmse": 378.88,
       "r2": 0.9999,
-      "mape": 4.14
+      "mape": 4.39
     },
     {
       "name": "RandomForest",
-      "mae": 272.27,
-      "rmse": 571.4,
+      "mae": 271.35,
+      "rmse": 578.71,
       "r2": 0.9997,
       "mape": 1.04
     }

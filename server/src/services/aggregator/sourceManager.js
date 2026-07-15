@@ -34,7 +34,11 @@ async function normalizeApiProduct(rawProduct, sourceName, preloadedRateINR = nu
   if (!rawProduct) return null;
   
   // Coalesce various API price fields
-  const rawPrice = rawProduct.price?.value || rawProduct.price || rawProduct.product_price || rawProduct.salePrice || 0;
+  // Amazon (real-time-amazon-data) returns Indian prices as formatted strings like "₹59,900".
+  // Strip any non-numeric characters (currency symbols, commas, spaces) before parsing so
+  // parseFloat doesn't yield NaN. Numeric prices (eBay/Walmart) pass through unchanged.
+  const rawPriceRaw = rawProduct.price?.value || rawProduct.price || rawProduct.product_price || rawProduct.salePrice || 0;
+  const rawPrice = typeof rawPriceRaw === 'string' ? rawPriceRaw.replace(/[^0-9.]/g, '') : rawPriceRaw;
   const title = rawProduct.title || rawProduct.product_title || rawProduct.name || '';
   
   // Walmart uses onlineAvailability boolean

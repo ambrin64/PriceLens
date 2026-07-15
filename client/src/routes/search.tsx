@@ -24,6 +24,12 @@ function SearchPage() {
   const { q = "", cat = "All" } = Route.useSearch();
   const navigate = useNavigate();
   const [input, setInput] = useState(q);
+
+  // Sync the box when the query changes externally (e.g. Navbar search), so the debounce
+  // effect below doesn't revert an externally-set query using a stale local input.
+  useEffect(() => {
+    setInput(q);
+  }, [q]);
   const [sort, setSort] = useState<"relevance" | "price-asc" | "price-desc" | "rating">(
     "relevance",
   );
