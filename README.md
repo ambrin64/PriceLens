@@ -63,7 +63,7 @@ Copy `.env.example` to `.env` in `server/` and fill in:
 | Real Amazon product search (RapidAPI) | ✅ |
 | eBay scraping (cheerio) | ✅ |
 | Product price history tracking | ✅ |
-| ML price prediction (RandomForest) | ✅ |
+| ML price prediction (Gradient Boosting) | ✅ |
 | Price-drop email alerts | ✅ |
 | JWT Authentication | ✅ |
 | User Dashboard + Watchlist | ✅ |
