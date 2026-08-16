@@ -81,12 +81,16 @@ const withRetry = async (fn, retries = MAX_RETRIES) => {
  * Normalize a PriceHistory array into the compact format expected by Flask.
  * Filters out entries with invalid or zero prices.
  */
+// The ml timestamp/date mismatch
 const buildHistoryPayload = (historyDocs) =>
   (historyDocs || [])
     .filter((h) => h.price > 0)
     .map((h) => {
       // PriceHistory docs store the date on `timestamp`; older callers may use `date`.
       // Support both so the ML service never receives an unparseable "undefined" date.
+
+      //previously was only h.date instead of h.date || h.timestamp
+      //h.date didnt exist so every date became undefined
       const d = h.date || h.timestamp;
       return {
         date:  d instanceof Date

@@ -43,6 +43,8 @@ function SearchPage() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
   // Debounced Search
+  //line 48 was reverting search. The new useEffect on[q] keeps input in sync
+  //so that comparison never fires with a stale value
   useEffect(() => {
     const handler = setTimeout(() => {
       if (input !== q) {

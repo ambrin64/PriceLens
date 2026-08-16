@@ -37,7 +37,9 @@ async function normalizeApiProduct(rawProduct, sourceName, preloadedRateINR = nu
   // Amazon (real-time-amazon-data) returns Indian prices as formatted strings like "₹59,900".
   // Strip any non-numeric characters (currency symbols, commas, spaces) before parsing so
   // parseFloat doesn't yield NaN. Numeric prices (eBay/Walmart) pass through unchanged.
+
   const rawPriceRaw = rawProduct.price?.value || rawProduct.price || rawProduct.product_price || rawProduct.salePrice || 0;
+  //"₹59,900" → .replace(/[^0-9.]/g, '') → "59900". Strings get cleaned; already-numeric prices pass through untouched.
   const rawPrice = typeof rawPriceRaw === 'string' ? rawPriceRaw.replace(/[^0-9.]/g, '') : rawPriceRaw;
   const title = rawProduct.title || rawProduct.product_title || rawProduct.name || '';
   
