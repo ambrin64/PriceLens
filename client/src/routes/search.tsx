@@ -28,7 +28,8 @@ function SearchPage() {
   // Sync the box when the query changes externally (e.g. Navbar search), so the debounce
   // effect below doesn't revert an externally-set query using a stale local input.
   useEffect(() => {
-    setInput(q);
+    setInput(q);//The new useEffect on[q] keeps input in sync
+  //so that comparison never fires with a stale value
   }, [q]);
   const [sort, setSort] = useState<"relevance" | "price-asc" | "price-desc" | "rating">(
     "relevance",
@@ -43,8 +44,7 @@ function SearchPage() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 
   // Debounced Search
-  //line 48 was reverting search. The new useEffect on[q] keeps input in sync
-  //so that comparison never fires with a stale value
+  //line 48 was reverting search.
   useEffect(() => {
     const handler = setTimeout(() => {
       if (input !== q) {
