@@ -38,7 +38,7 @@ npm run dev
 ### 4. ML Service
 ```bash
 cd ml-service
-python -m venv venv
+py -3.13 -m venv venv          # use 3.13, not a newer default `python` — scientific libs may lack prebuilt wheels for it
 venv\Scripts\activate          # Windows
 pip install -r requirements.txt
 python app.py
